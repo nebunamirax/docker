@@ -46,3 +46,7 @@ RUN set -ex \
     && rm -rf bootstrap/cache/*
 
 USER root
+
+COPY config/supervisord.conf /etc/supervisord.conf
+
+CMD ["/usr/bin/supervisord", "-c", "/etc/supervisord.conf"]

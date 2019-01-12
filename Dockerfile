@@ -3,9 +3,14 @@ FROM php:7.3-fpm-alpine
 ENV COMPOSER_VERSION 1.8.0
 ENV GALAXY_OF_DRONES_ONLINE_VERSION master
 
+# Install packages
+RUN set -ex \
+    && apk add --no-cache --update nginx supervisor \
+    && touch /var/run/nginx.pid
+
 # Install php extensions
 RUN set -ex \
-    && apk add --no-cache --virtual .phpize-deps $PHPIZE_DEPS imagemagick-dev libtool \
+    && apk add --no-cache --update --virtual .phpize-deps $PHPIZE_DEPS imagemagick-dev libtool \
     && export CFLAGS="$PHP_CFLAGS" CPPFLAGS="$PHP_CPPFLAGS" LDFLAGS="$PHP_LDFLAGS" \
     && pecl install imagick-3.4.3 \
     && docker-php-ext-enable imagick \
@@ -22,8 +27,9 @@ RUN set -ex \
     && php -r "unlink('composer-setup.php');" \
     && php -r "unlink('composer-setup.sig');"
 
-# Set owner and group of html directory
+# Set www-data as default user
 RUN set -ex \
+    && sed -i "s/user .*/user www-data/" /etc/nginx/nginx.conf \
     && chown -R www-data:www-data /var/www/html
 
 USER www-data

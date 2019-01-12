@@ -5,8 +5,7 @@ ENV GALAXY_OF_DRONES_ONLINE_VERSION master
 
 # Install packages
 RUN set -ex \
-    && apk add --no-cache --update nginx supervisor \
-    && touch /var/run/nginx.pid
+    && apk add --no-cache --update nginx supervisor
 
 # Install php extensions
 RUN set -ex \
@@ -27,9 +26,12 @@ RUN set -ex \
     && php -r "unlink('composer-setup.php');" \
     && php -r "unlink('composer-setup.sig');"
 
-# Set www-data as default user
+# Setup services
 RUN set -ex \
-    && sed -i "s/user .*/user www-data/" /etc/nginx/nginx.conf \
+    && mkdir -p /run/nginx \
+    && touch /run/nginx/nginx.pid \
+    && sed -i "s/user .*;/user www-data;/" /etc/nginx/nginx.conf \
+    && echo "daemon off;" >> /etc/nginx/nginx.conf \
     && chown -R www-data:www-data /var/www/html
 
 USER www-data

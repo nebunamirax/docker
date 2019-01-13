@@ -1,7 +1,7 @@
 FROM php:7.3-fpm-alpine
 
 ENV COMPOSER_VERSION 1.8.0
-ENV GALAXY_OF_DRONES_ONLINE_VERSION master
+ENV GALAXY_OF_DRONES_VERSION master
 
 # Install packages
 RUN set -ex \
@@ -38,9 +38,9 @@ USER www-data
 
 # Install app
 RUN set -ex \
-    && wget https://github.com/galaxyofdrones/galaxyofdrones/archive/${GALAXY_OF_DRONES_ONLINE_VERSION}.tar.gz \
-    && tar xzf ${GALAXY_OF_DRONES_ONLINE_VERSION}.tar.gz --strip-components=1 \
-    && rm -r ${GALAXY_OF_DRONES_ONLINE_VERSION}.tar.gz \
+    && wget https://github.com/galaxyofdrones/galaxyofdrones/archive/${GALAXY_OF_DRONES_VERSION}.tar.gz \
+    && tar xzf ${GALAXY_OF_DRONES_VERSION}.tar.gz --strip-components=1 \
+    && rm -r ${GALAXY_OF_DRONES_VERSION}.tar.gz \
     && composer global require "hirak/prestissimo:^0.3" \
     && composer install -o --no-dev \
     && rm -rf bootstrap/cache/*

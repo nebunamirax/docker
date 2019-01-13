@@ -1,0 +1,34 @@
+version: '3'
+
+services:
+  mysql:
+    image: mysql:5.7
+    volumes:
+      - galaxyofdrones-mysql:/var/lib/mysql
+    networks:
+      - galaxyofdrones
+  redis:
+    image: redis:alpine
+    volumes:
+      - galaxyofdrones-redis:/data
+    networks:
+      - galaxyofdrones
+  app:
+    build: .
+    ports:
+      - 8000:8000
+    depends_on:
+      - mysql
+      - redis
+    volumes:
+      - galaxyofdrones-storage:/var/www/html/storage
+    networks:
+      - galaxyofdrones
+
+volumes:
+  galaxyofdrones-mysql:
+  galaxyofdrones-redis:
+  galaxyofdrones-storage:
+
+networks:
+  galaxyofdrones:

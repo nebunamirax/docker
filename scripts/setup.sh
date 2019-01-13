@@ -13,3 +13,5 @@ if [ "$DB_HOST" = "mysql" ]; then
 fi
 
 php /var/www/html/artisan migrate --force --seed
+
+echo "* * * * * /usr/local/bin/php /var/www/html/artisan schedule:run >> /dev/null 2>&1" > /etc/crontabs/www-data

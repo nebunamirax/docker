@@ -49,6 +49,7 @@ USER root
 
 COPY config/supervisord.conf /etc/supervisord.conf
 COPY config/nginx-site.conf /etc/nginx/conf.d/default.conf
+COPY scripts/entrypoint.sh /usr/local/bin/entrypoint.sh
 
 EXPOSE 8000
-CMD ["/usr/bin/supervisord", "-c", "/etc/supervisord.conf"]
+ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]

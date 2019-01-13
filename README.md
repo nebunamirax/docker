@@ -1,3 +1,3 @@
-# Galaxy of Drones Online Docker Image
+# Galaxy of Drones Online Docker
 
 The dockerized version.

@@ -5,17 +5,18 @@ ENV GALAXY_OF_DRONES_VERSION master
 
 # Install packages
 RUN set -ex \
-    && apk add --no-cache --update nginx supervisor
+    && apk add --update --no-cache --virtual .run-deps imagemagick libzip nginx supervisor
 
 # Install php extensions
 RUN set -ex \
-    && apk add --no-cache --virtual .phpize-deps $PHPIZE_DEPS imagemagick-dev libtool \
+    && apk add --no-cache --virtual .build-deps $PHPIZE_DEPS libtool imagemagick-dev zlib-dev libzip-dev \
     && export CFLAGS="$PHP_CFLAGS" CPPFLAGS="$PHP_CPPFLAGS" LDFLAGS="$PHP_LDFLAGS" \
     && pecl install imagick-3.4.3 \
     && docker-php-ext-enable imagick \
+    && pecl install zip \
+    && docker-php-ext-enable zip \
     && docker-php-ext-install bcmath pcntl pdo_mysql \
-    && apk add --no-cache --virtual .imagick-runtime-deps imagemagick \
-    && apk del .phpize-deps
+    && apk del .build-deps
 
 # Install composer
 RUN set -ex \

@@ -5,7 +5,7 @@ ENV GALAXY_OF_DRONES_VERSION master
 
 # Install packages
 RUN set -ex \
-    && apk add --update --no-cache --virtual .run-deps imagemagick libzip nginx supervisor
+    && apk add --update --no-cache --virtual .run-deps imagemagick libzip mysql-client nginx supervisor
 
 # Install php extensions
 RUN set -ex \
@@ -50,6 +50,7 @@ USER root
 
 COPY config/supervisord.conf /etc/supervisord.conf
 COPY config/nginx-site.conf /etc/nginx/conf.d/default.conf
+COPY scripts/setup.sh /usr/local/bin/setup.sh
 COPY scripts/entrypoint.sh /usr/local/bin/entrypoint.sh
 
 EXPOSE 8000

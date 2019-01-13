@@ -50,8 +50,9 @@ USER root
 
 COPY config/supervisord.conf /etc/supervisord.conf
 COPY config/nginx-site.conf /etc/nginx/conf.d/default.conf
-COPY scripts/setup.sh /usr/local/bin/setup.sh
 COPY scripts/entrypoint.sh /usr/local/bin/entrypoint.sh
+COPY scripts/envfile.sh /usr/local/bin/envfile.sh
+COPY scripts/setup.sh /usr/local/bin/setup.sh
 
 EXPOSE 8000
 ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]

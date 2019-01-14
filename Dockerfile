@@ -9,9 +9,9 @@ RUN set -ex \
 
 # Install php extensions
 RUN set -ex \
-    && apk add --no-cache --virtual .build-deps $PHPIZE_DEPS libtool imagemagick-dev zlib-dev libzip-dev \
+    && apk add --update --no-cache --virtual .build-deps $PHPIZE_DEPS libtool imagemagick-dev zlib-dev libzip-dev \
     && export CFLAGS="$PHP_CFLAGS" CPPFLAGS="$PHP_CPPFLAGS" LDFLAGS="$PHP_LDFLAGS" \
-    && pecl install imagick-3.4.3 \
+    && pecl install imagick \
     && docker-php-ext-enable imagick \
     && pecl install zip \
     && docker-php-ext-enable zip \

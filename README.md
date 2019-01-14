@@ -30,13 +30,19 @@ git clone git@github.com:galaxyofdrones/docker.git
 cd docker
 ```
 
-#### 3. Start the containers
+#### 3. Pull the latest image
 
 ```
-docker-compose up -d
+docker pull galaxyofdrones/docker:latest
 ```
 
-#### 4. Open the game in your browser
+#### 4. Start the containers
+
+```
+docker-compose up -d --no-build
+```
+
+#### 5. Open the game in your browser
 
 *Note: If you don't see the page, please wait for initialization.*
 
@@ -44,7 +50,7 @@ docker-compose up -d
 http://localhost:8000
 ```
 
-#### 5. Generate the starmap
+#### 6. Generate the starmap
 
 (estimated time: ~1 hour, estimated size: ~4 GB)
 

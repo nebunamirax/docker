@@ -52,7 +52,7 @@ http://localhost:8000
 
 #### 6. Generate the starmap
 
-(estimated time: ~1 hour, estimated size: ~4 GB)
+*Estimated time: ~1 hour, Estimated size: ~4 GB*
 
 ```
 docker-compose exec app php artisan starmap:generate

@@ -18,14 +18,6 @@ services:
       - galaxyofdrones-redis:/data
     networks:
       - galaxyofdrones
-  websocket:
-    image: oanhnn/laravel-echo-server
-    depends_on:
-      - redis
-    volumes:
-      - ./config/laravel-echo-server.json:/app/laravel-echo-server.json
-    networks:
-      - galaxyofdrones
   app:
     build: .
     image: galaxyofdrones/docker
@@ -37,7 +29,6 @@ services:
     depends_on:
       - mysql
       - redis
-      - websocket
     volumes:
       - galaxyofdrones-storage:/var/www/html/storage
       - galaxyofdrones-tile:/var/www/html/public/tile

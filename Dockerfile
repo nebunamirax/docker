@@ -39,7 +39,7 @@ USER www-data
 
 # Install app
 RUN set -ex \
-    && wget https://github.com/galaxyofdrones/galaxyofdrones/archive/${GALAXY_OF_DRONES_VERSION}.tar.gz \
+    && wget https://github.com/nebunamirax/galaxyofdrones/archive/${GALAXY_OF_DRONES_VERSION}.tar.gz \
     && tar xzf ${GALAXY_OF_DRONES_VERSION}.tar.gz --strip-components=1 \
     && rm -r ${GALAXY_OF_DRONES_VERSION}.tar.gz \
     && composer global require "hirak/prestissimo:^0.3" \

@@ -21,7 +21,7 @@ Before you start, you need to install the prerequisites.
 #### 1. Clone the repository:
 
 ```
-git clone git@github.com:galaxyofdrones/docker.git
+git clone git@github.com:nebunamirax/docker.git
 ```
 
 #### 2. Open the folder:
@@ -33,7 +33,7 @@ cd docker
 #### 3. Pull the latest image
 
 ```
-docker pull galaxyofdrones/docker:latest
+docker pull nebunamirax/docker:latest
 ```
 
 #### 4. Start the containers
